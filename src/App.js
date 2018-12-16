@@ -171,6 +171,10 @@ class App extends Component {
         </form>
 
         <div className="column">
+          <p>
+            Source code is{" "}
+            <a href="https://github.com/stereobooster/lingui-choices">here</a>
+          </p>
           <h3>Recommendations</h3>
           {isGettext(state) && isSourceLocale(state) && isDefault(state) && (
             <p>

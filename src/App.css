@@ -12,11 +12,11 @@
 label {
   cursor: pointer;
   display: block;
-  margin-bottom: 0.25rem
+  margin-bottom: 0.25rem;
 }
 
 .hint {
-  margin-bottom: 0.25rem
+  margin-bottom: 0.25rem;
 }
 
 .disabled {
@@ -33,6 +33,12 @@ h4 {
 
 .content {
   display: flex;
+}
+
+@media (max-width: 400px) {
+  .content {
+    display: block;
+  }
 }
 
 .column {
