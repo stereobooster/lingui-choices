@@ -4,28 +4,63 @@ import Radio from "./components/Radio";
 import Checkbox from "./components/Checkbox";
 
 const isReact = state => state["react"];
-const inUrl = state => state["locale"] === "inUrl";
+const isInUrl = state => state["locale"] === "inUrl";
+const isPrerendering = state =>
+  state["html"] !== "no" && state["html"] !== undefined;
+const isGettext = state => state["format"] === "gettext";
+const isJson = state => state["format"] === "json";
+const isSourceLocale = state => !!state["sourceLocale"];
+const isDefault = state => state["keyScheme"] === "default";
+const isSynthetic = state => state["keyScheme"] === "synthetic";
+const isSyntheticAndDefault = state =>
+  state["keyScheme"] === "syntheticAndDefault";
+
+const isCatalogs = state => state["translations"] === "catalogs";
+const isSeparateBundles = state => state["translations"] === "separateBundles";
+
+const isWebpack = state => state["bundler"] === "webpack";
+const isOtherBundler = state => state["bundler"] === "other";
 
 const disabledHtml = state => !isReact(state);
-const disabledPrerendering = state => !isReact(state) || !inUrl(state);
+const disabledPrerendering = state => !isReact(state) || !isInUrl(state);
 
 class App extends Component {
-  state = {};
+  state = {
+    format: "gettext",
+    keyScheme: "default"
+  };
   render() {
-    const stateProvider = {
-      state: this.state,
-      setState: this.setState.bind(this)
-    };
-
+    const { state } = this;
+    const stateProvider = { state, setState: this.setState.bind(this) };
     return (
       <div className="content">
         <form className="column">
           <h3>Choices</h3>
 
           <div className="field">
+            <h4>
+              What <code>format</code> do you use?
+            </h4>
+            <Radio name="format" value="gettext" {...stateProvider}>
+              <code>po</code> (recommended)
+            </Radio>
+            <Radio name="format" value="json" {...stateProvider}>
+              <code>json</code>
+            </Radio>
+          </div>
+
+          <div className="field">
+            <h4>
+              Do you use <code>sourceLocale</code>?
+            </h4>
+            <Checkbox name="sourceLocale" {...stateProvider}>
+              Yes
+            </Checkbox>
+          </div>
+
+          <div className="field">
             <h4>Key scheme</h4>
             <div className="hint">
-              {" "}
               Read more{" "}
               <a href="https://github.com/lingui/js-lingui/issues/412#issue-387479674">
                 here
@@ -60,11 +95,15 @@ class App extends Component {
 
           <div className="field">
             <h4>How do you compile translations?</h4>
-            <Radio name="catalogs" value="catalog" {...stateProvider}>
-              Catalog for ecach languge e.g. <code>main.js</code> and one of{" "}
+            <Radio name="translations" value="catalogs" {...stateProvider}>
+              Catalog for each languge e.g. <code>main.js</code> and one of{" "}
               <code>i18n.en.js</code>, <code>i18n.cs.js</code>
             </Radio>
-            <Radio name="catalogs" value="separateBundle" {...stateProvider}>
+            <Radio
+              name="translations"
+              value="separateBundles"
+              {...stateProvider}
+            >
               Separate JS bundle for each language e.g. <code>main.en.js</code>{" "}
               or <code>main.cs.js</code>
             </Radio>
@@ -81,14 +120,14 @@ class App extends Component {
           </div>
 
           <div className="field">
-            <h4 className={disabledHtml(this.state) ? "disabled" : undefined}>
+            <h4 className={disabledHtml(state) ? "disabled" : undefined}>
               Do you have prerendered HTML?
             </h4>
             <Radio
               name="html"
               value="ssr"
               {...stateProvider}
-              disabled={disabledHtml(this.state)}
+              disabled={disabledHtml(state)}
             >
               Yes, Server Side Rendering
             </Radio>
@@ -96,7 +135,7 @@ class App extends Component {
               name="html"
               value="prerendering"
               {...stateProvider}
-              disabled={disabledPrerendering(this.state)}
+              disabled={disabledPrerendering(state)}
             >
               Yes, prerendering, for example react-snap, react-static or Gatsby
             </Radio>
@@ -104,19 +143,9 @@ class App extends Component {
               name="html"
               value="no"
               {...stateProvider}
-              disabled={disabledHtml(this.state)}
+              disabled={disabledHtml(state)}
             >
               No
-            </Radio>
-          </div>
-
-          <div className="field">
-            <h4>How did you configure Babel?</h4>
-            <Radio name="babel" value="macros" {...stateProvider}>
-              macros (recommended)
-            </Radio>
-            <Radio name="babel" value="transform" {...stateProvider}>
-              babel-transform plugin
             </Radio>
           </div>
 
@@ -129,9 +158,77 @@ class App extends Component {
               Other
             </Radio>
           </div>
+
+          <div className="field">
+            <h4>How did you configure Babel?</h4>
+            <Radio name="babel" value="macros" {...stateProvider}>
+              macros (recommended)
+            </Radio>
+            <Radio name="babel" value="transform" {...stateProvider}>
+              babel-transform plugin
+            </Radio>
+          </div>
         </form>
+
         <div className="column">
           <h3>Recommendations</h3>
+          {isGettext(state) && isSourceLocale(state) && isDefault(state) && (
+            <p>
+              You may need <code>#, fuzzy</code> flag. See{" "}
+              <a href="https://github.com/lingui/js-lingui/issues/383#issuecomment-435217183">
+                #383
+              </a>
+            </p>
+          )}
+          {isSourceLocale(state) && isSynthetic(state) && (
+            <p>
+              You need to make sure you don't deliver synthetic keys to users.
+              See{" "}
+              <a href="https://github.com/lingui/js-lingui/issues/405">#405</a>
+            </p>
+          )}
+          {!isJson(state) &&
+            !isSourceLocale(state) &&
+            isSyntheticAndDefault(state) && (
+              <p>
+                You may want to use <code>sourceLocale</code> otherwise default
+                values won't get extracted.
+              </p>
+            )}
+          {isCatalogs(state) && (
+            <p>
+              You may need to figure out how to do code splitting for catalogs.{" "}
+              <a href="https://github.com/lingui/js-lingui/issues/139">#139</a>{" "}
+              can improve situation.
+            </p>
+          )}
+          {isSeparateBundles(state) && (
+            <p>
+              Good news! Problem with code spliting is solved if your bundler
+              supports code splitting for JS, like Webpack.
+            </p>
+          )}
+          {isPrerendering(state) && (
+            <p>
+              <a href="https://dev.to/stereobooster/friday-hack-suspense-concurrent-mode-and-lazy-to-load-locales-for-i18n-hgg">
+                You need some workaround to prevent white flash
+              </a>
+            </p>
+          )}
+          {isCatalogs(state) && isWebpack(state) && (
+            <p>
+              Good news! Problem with cache invalidation is solved. Use
+              something like this to load catalogs{" "}
+              <code>
+                {
+                  'return import(/* webpackMode: "lazy", webpackChunkName: "i18n-[index]" */ `./locales/${locale}/messages.js`);'
+                }
+              </code>
+            </p>
+          )}
+          {isCatalogs(state) && isOtherBundler(state) && (
+            <p>You need to figure out how to invalidate cache for catalogs</p>
+          )}
         </div>
       </div>
     );
