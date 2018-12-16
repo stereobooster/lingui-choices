@@ -1,13 +1,13 @@
 {
-  "main.css": "/stereobooster/lingui-choices/static/css/main.9d4a6b27.chunk.css",
-  "main.js": "/stereobooster/lingui-choices/static/js/main.44f8cb4c.chunk.js",
-  "main.js.map": "/stereobooster/lingui-choices/static/js/main.44f8cb4c.chunk.js.map",
-  "static/js/1.ec051b8d.chunk.js": "/stereobooster/lingui-choices/static/js/1.ec051b8d.chunk.js",
-  "static/js/1.ec051b8d.chunk.js.map": "/stereobooster/lingui-choices/static/js/1.ec051b8d.chunk.js.map",
-  "runtime~main.js": "/stereobooster/lingui-choices/static/js/runtime~main.e84ddb5c.js",
-  "runtime~main.js.map": "/stereobooster/lingui-choices/static/js/runtime~main.e84ddb5c.js.map",
-  "static/css/main.9d4a6b27.chunk.css.map": "/stereobooster/lingui-choices/static/css/main.9d4a6b27.chunk.css.map",
-  "index.html": "/stereobooster/lingui-choices/index.html",
-  "precache-manifest.b6b1fa76c83dbb8326a62f14eb8e71b6.js": "/stereobooster/lingui-choices/precache-manifest.b6b1fa76c83dbb8326a62f14eb8e71b6.js",
-  "service-worker.js": "/stereobooster/lingui-choices/service-worker.js"
+  "main.css": "/lingui-choices/static/css/main.9d4a6b27.chunk.css",
+  "main.js": "/lingui-choices/static/js/main.51f43409.chunk.js",
+  "main.js.map": "/lingui-choices/static/js/main.51f43409.chunk.js.map",
+  "static/js/1.ec051b8d.chunk.js": "/lingui-choices/static/js/1.ec051b8d.chunk.js",
+  "static/js/1.ec051b8d.chunk.js.map": "/lingui-choices/static/js/1.ec051b8d.chunk.js.map",
+  "runtime~main.js": "/lingui-choices/static/js/runtime~main.efd125d0.js",
+  "runtime~main.js.map": "/lingui-choices/static/js/runtime~main.efd125d0.js.map",
+  "static/css/main.9d4a6b27.chunk.css.map": "/lingui-choices/static/css/main.9d4a6b27.chunk.css.map",
+  "index.html": "/lingui-choices/index.html",
+  "precache-manifest.62cdcdc1e2a3b7ea3189eef0bc8d9521.js": "/lingui-choices/precache-manifest.62cdcdc1e2a3b7ea3189eef0bc8d9521.js",
+  "service-worker.js": "/lingui-choices/service-worker.js"
 }

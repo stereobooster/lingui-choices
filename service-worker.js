@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/stereobooster/lingui-choices/precache-manifest.b6b1fa76c83dbb8326a62f14eb8e71b6.js"
+  "/lingui-choices/precache-manifest.62cdcdc1e2a3b7ea3189eef0bc8d9521.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/stereobooster/lingui-choices/index.html", {
+workbox.routing.registerNavigationRoute("/lingui-choices/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
