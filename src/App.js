@@ -3,6 +3,12 @@ import "./App.css";
 import Radio from "./components/Radio";
 import Checkbox from "./components/Checkbox";
 
+const isReact = state => state["react"];
+const inUrl = state => state["locale"] === "inUrl";
+
+const disabledHtml = state => !isReact(state);
+const disabledPrerendering = state => !isReact(state) || !inUrl(state);
+
 class App extends Component {
   state = {};
   render() {
@@ -41,6 +47,18 @@ class App extends Component {
           </div>
 
           <div className="field">
+            <h4>Where do you store locale?</h4>
+            <Radio name="locale" value="inUrl" {...stateProvider}>
+              in URL e.g. <code>example.com/en/foo</code> or{" "}
+              <code>example.com/cs/foo</code>
+            </Radio>
+            <Radio name="locale" value="notInUrl" {...stateProvider}>
+              not in URL, for example in <code>cookies</code> or{" "}
+              <code>localStorage</code> or server session or server database
+            </Radio>
+          </div>
+
+          <div className="field">
             <h4>How do you compile translations?</h4>
             <Radio name="catalogs" value="catalog" {...stateProvider}>
               Catalog for ecach languge e.g. <code>main.js</code> and one of{" "}
@@ -63,14 +81,31 @@ class App extends Component {
           </div>
 
           <div className="field">
-            <h4>Do you have prerendered HTML?</h4>
-            <Radio name="html" value="ssr" {...stateProvider}>
+            <h4 className={disabledHtml(this.state) ? "disabled" : undefined}>
+              Do you have prerendered HTML?
+            </h4>
+            <Radio
+              name="html"
+              value="ssr"
+              {...stateProvider}
+              disabled={disabledHtml(this.state)}
+            >
               Yes, Server Side Rendering
             </Radio>
-            <Radio name="html" value="prerendering" {...stateProvider}>
+            <Radio
+              name="html"
+              value="prerendering"
+              {...stateProvider}
+              disabled={disabledPrerendering(this.state)}
+            >
               Yes, prerendering, for example react-snap, react-static or Gatsby
             </Radio>
-            <Radio name="html" value="no" {...stateProvider}>
+            <Radio
+              name="html"
+              value="no"
+              {...stateProvider}
+              disabled={disabledHtml(this.state)}
+            >
               No
             </Radio>
           </div>
@@ -92,18 +127,6 @@ class App extends Component {
             </Radio>
             <Radio name="bundler" value="other" {...stateProvider}>
               Other
-            </Radio>
-          </div>
-
-          <div className="field">
-            <h4>Where do you store locale?</h4>
-            <Radio name="locale" value="inUrl" {...stateProvider}>
-              in URL e.g. <code>example.com/en/foo</code> or{" "}
-              <code>example.com/cs/foo</code>
-            </Radio>
-            <Radio name="locale" value="notInUrl" {...stateProvider}>
-              not in URL, for example in <code>cookies</code> or{" "}
-              <code>localStorage</code> or server session or server database
             </Radio>
           </div>
         </form>

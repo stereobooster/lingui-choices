@@ -8,14 +8,21 @@ const onChange = (name, state, setState) => () =>
   setState({ [name]: !state[name] });
 
 // boolean checkbox
-export default function Checkbox({ name, children, state, setState }) {
+export default function Checkbox({
+  name,
+  children,
+  state,
+  setState,
+  disabled
+}) {
   return (
-    <label>
+    <label className={disabled ? "disabled" : undefined}>
       <input
         type="checkbox"
         name={name}
         checked={checked(name, state)}
         onChange={onChange(name, state, setState)}
+        disabled={disabled}
       />{" "}
       {children}
     </label>

@@ -6,15 +6,23 @@ const checked = (name, value, state) => current(name, state) === value;
 
 const onChange = (name, value, setState) => () => setState({ [name]: value });
 
-export default function Radio({ name, value, children, state, setState }) {
+export default function Radio({
+  name,
+  value,
+  children,
+  state,
+  setState,
+  disabled
+}) {
   return (
-    <label>
+    <label className={disabled ? "disabled" : undefined}>
       <input
         type="radio"
         name={name}
         value={value}
         checked={checked(name, value, state)}
         onChange={onChange(name, value, setState)}
+        disabled={disabled}
       />{" "}
       {children}
     </label>
