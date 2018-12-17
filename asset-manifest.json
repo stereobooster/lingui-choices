@@ -1,13 +1,13 @@
 {
-  "main.css": "/lingui-choices/static/css/main.9d4a6b27.chunk.css",
-  "main.js": "/lingui-choices/static/js/main.51f43409.chunk.js",
-  "main.js.map": "/lingui-choices/static/js/main.51f43409.chunk.js.map",
+  "main.css": "/lingui-choices/static/css/main.5ee4de06.chunk.css",
+  "main.js": "/lingui-choices/static/js/main.036c9ae8.chunk.js",
+  "main.js.map": "/lingui-choices/static/js/main.036c9ae8.chunk.js.map",
   "static/js/1.ec051b8d.chunk.js": "/lingui-choices/static/js/1.ec051b8d.chunk.js",
   "static/js/1.ec051b8d.chunk.js.map": "/lingui-choices/static/js/1.ec051b8d.chunk.js.map",
   "runtime~main.js": "/lingui-choices/static/js/runtime~main.efd125d0.js",
   "runtime~main.js.map": "/lingui-choices/static/js/runtime~main.efd125d0.js.map",
-  "static/css/main.9d4a6b27.chunk.css.map": "/lingui-choices/static/css/main.9d4a6b27.chunk.css.map",
+  "static/css/main.5ee4de06.chunk.css.map": "/lingui-choices/static/css/main.5ee4de06.chunk.css.map",
   "index.html": "/lingui-choices/index.html",
-  "precache-manifest.62cdcdc1e2a3b7ea3189eef0bc8d9521.js": "/lingui-choices/precache-manifest.62cdcdc1e2a3b7ea3189eef0bc8d9521.js",
+  "precache-manifest.388a630de4ff47eeb3ca2d2a3782d9ef.js": "/lingui-choices/precache-manifest.388a630de4ff47eeb3ca2d2a3782d9ef.js",
   "service-worker.js": "/lingui-choices/service-worker.js"
 }
