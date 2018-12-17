@@ -26,8 +26,12 @@ const disabledPrerendering = state => !isReact(state) || !isInUrl(state);
 
 class App extends Component {
   state = {
+    keyScheme: "default",
     format: "gettext",
-    keyScheme: "default"
+    translations: "catalogs",
+    locale: "inUrl",
+    bundler: "webpack",
+    babel: "macros"
   };
   render() {
     const { state } = this;
